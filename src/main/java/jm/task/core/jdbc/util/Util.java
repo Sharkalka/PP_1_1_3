@@ -1,6 +1,8 @@
 package jm.task.core.jdbc.util;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Util {
 
@@ -8,7 +10,7 @@ public class Util {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "MySQL";
 
-    private static Connection con = null;
+    private static Connection con;
 
     static {
         try {
@@ -16,12 +18,6 @@ public class Util {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error SQL!");
-        //} catch (ClassNotFoundException e) {
-            //e.printStackTrace();
-           // System.out.println("JDBC driver not found!");
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            System.out.println("Cannot approve connection!");
         }
     }
 

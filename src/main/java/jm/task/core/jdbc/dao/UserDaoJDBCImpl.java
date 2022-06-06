@@ -3,7 +3,10 @@ package jm.task.core.jdbc.dao;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        try (Statement statement = Util.getCon().createStatement()){
+        try (Statement statement = Util.getCon().createStatement()) {
             statement.execute("DROP TABLE IF EXISTS User;");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,11 +65,10 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
 
-        try {
-            Statement statement = Util.getCon().createStatement();
+        try (Statement statement = Util.getCon().createStatement()){
             ResultSet resultSet = statement.executeQuery("SELECT * FROM User");
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 User user = new User();
 
                 user.setId(resultSet.getLong("userId"));
