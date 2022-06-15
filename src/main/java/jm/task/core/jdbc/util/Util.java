@@ -22,6 +22,13 @@ public class Util {
     }
 
     public static Connection getCon() {
+        try {
+            con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            return con;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error SQL!");
+        }
         return con;
     }
 }
